@@ -1,4 +1,4 @@
-# CIF2WANv0.5
+# CIF2WAN v0.6
  CIF2WAN
 
 Tested:
