@@ -1,6 +1,8 @@
 # CIF2WAN v0.6
 Bugs should be report with Github's "issue" tab
+
 request for features can be sent to christophersims@knights.ucf.edu
+
 CIF2WAN
 
 Tested:
