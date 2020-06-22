@@ -2,7 +2,7 @@
 ncore = 50 # number of cores for calculation
 ECUT = 60 # Energy cutoff in Ryberg
 DFT = "ESPRESSO" #ESPRESSO, SIESTA, ABINIT, VASP
-APIKEY = "4XK0y0eziIorGoHP0M" #APIKEY for mat
+APIKEY = "" #APIKEY for mat
 MATERIALID = "mp-1523" # imput for pymatgen
 SEEDNAME = "ZP" #your own name or default
 EMAIL = "Christopherssims95@gmail.com"
