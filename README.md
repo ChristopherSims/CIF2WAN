@@ -1,5 +1,6 @@
 # CIF2WAN v0.6
 You must include your own pseudopotentials
+
 Please Cite https://arxiv.org/abs/2006.12647 if you use this tool
 
 Bugs should be reported with Github's "issue" tab
