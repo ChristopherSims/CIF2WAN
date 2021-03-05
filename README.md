@@ -1,28 +1,18 @@
 # CIF2WANv0.5
  CIF2WAN
+VASP: not well tested
 
-Tested:
+Quantum espresso: well tested
 
-VASP, not well tested
+Siesta: testing
 
-Quantum espresso, well tested, good
-
-Siesta, not well tested, next on list
-
-Abinit, tested, error in SOC case
+Abinit: well tested
 
 Todo:
-
-add magnetism
-
+add GUI
 add pure CIF interface
-
 add PP for siesta
-
 add LDA+U for siesta 
-
 Known issues:
-
 wannier90 convergence, wobbly bands. No way to fix, increase num_iter
-
 Abinit SOC case, .mmn not output correctly, error at w90 interface
