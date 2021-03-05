@@ -1,6 +1,8 @@
 # CIF2WANv0.5
 CIF2WAN
 
+Edit input.Py then run main.py
+
 See https://arxiv.org/abs/2006.12647 for details
 
 VASP: not well tested
