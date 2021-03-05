@@ -1,0 +1,152 @@
+#### wt file ###########
+&TB_FILE
+Hrfile = 'ZIS_hr.dat'
+Package = 'ESPRESSO'
+/
+
+
+LATTICE
+Angstrom
+3.882188 -0.005707 15.311058
+1.906044 3.382072 15.311058
+-0.009783 -0.005707 15.795562
+
+
+ATOM_POSITIONS
+9 !Number of atoms for projectors
+Direct ! Direct or Cartisen coordinateS
+In 0.103904 0.103904 0.103904
+In 0.922265 0.922265 0.922265
+S 0.008240 0.008240 0.008240
+S 0.469226 0.469226 0.469226
+S 0.611174 0.611174 0.611174
+S 0.742984 0.742984 0.742984
+S 0.868878 0.868878 0.868878
+Zn 0.688196 0.688196 0.688196
+Zn 0.517133 0.517133 0.517133
+
+
+
+
+PROJECTORS
+14 14 14 13 13 13 13 13 13 
+In s pz px py
+In s pz px py
+S s pz px py
+S s pz px py
+S s pz px py
+S s pz px py
+S s pz px py
+Zn s pz px py
+Zn s pz px py
+
+
+
+&CONTROL
+! BULK BAND CALCULATIONS 
+BulkBand_calc       =  F
+BulkBand_plane_calc =  F 
+BulkFS_calc         =  F 
+BulkFS_Plane_calc   =  F
+SlabBand_calc       =  F
+Dos_calc            =  F
+! BULK GAP
+BulkGap_cube_calc   =  F
+BulkGap_plane_calc  =  F
+! SURFACE STATES
+SlabSS_calc         =  T
+SlabArc_calc        =  T
+SlabSpintexture_calc =  F
+! TOPO INV
+wanniercenter_calc   = F
+BerryPhase_calc     =  F
+BerryCurvature_calc =  F
+BerryCurvature_slab_calc =  F
+Z2_3D_calc          =  F
+WeylChirality_calc  =  F
+NLChirality_calc    =  F
+Chern_3D_calc       =  F
+MirrorChern_calc    =  F
+!QUASIPARTICLE (STM)
+JDos_calc           =  F
+FindNodes_calc      =  F
+EffectiveMass_calc  =  F
+AHC_calc            =  F
+Boltz_OHE_calc      =  F
+LOTO_correction     =  F
+OrbitalTexture_calc    =  F
+OrbitalTexture_3D_calc =  F
+LandauLevel_k_calc     =  F
+LandauLevel_B_calc     =  F
+LandauLevel_wavefunction_calc     =  F
+Fit_kp_calc         =  F
+DMFT_MAG_calc       =  F
+Translate_to_WS_calc=  F
+LandauLevel_kplane_calc = F
+LandauLevel_k_dos_calc = F
+LandauLevel_B_dos_calc = F 
+/
+
+
+&SYSTEM
+NSLAB = 20                ! for thin film system
+NumOccupied = 60        ! NumOccupied
+SOC = 0
+E_FERMI = 0.0
+surf_onsite= 0.0
+/
+
+
+&PARAMETERS 
+Eta_Arc = 0.01     ! infinite small value, like brodening 
+E_arc = 0.0      ! energy level for contour plot of spectrum
+OmegaNum = 401      ! omega number       
+OmegaMin = -1.0   ! energy interval
+OmegaMax =  1.0     ! energy interval
+Nk1 =  101            ! number k points  odd number would be better
+Nk2 = 101            ! number k points  odd number would be better
+Nk3 = 11            ! number k points  odd number would be better
+NP = 2              ! number of principle layers
+Gap_threshold = 0.01 ! threshold for FindNodes_calc output
+/
+
+
+MILLER_INDEX
+0 0 1
+
+
+KPATH_BULK            ! k point path 
+4              ! number of k line only for bulk band
+G 0.00000 0.00000 0.0000 Z 0.00000 0.00000 0.5000
+Z 0.00000 0.00000 0.5000 F 0.50000 0.50000 0.0000
+F 0.50000 0.50000 0.0000 G 0.00000 0.00000 0.0000
+ G 0.00000 0.00000 0.0000 L 0.50000 0.00000 0.0000 
+
+
+
+KPATH_SLAB 
+4        ! numker of k line for 2D case 
+Y 0.0 0.5 G 0.0 0.0
+G 0.0 0.0 X 0.5 0.0
+X 0.5 0.0 M 0.5 0.5
+ M 0.5 0.5 G 0.0 0.0
+
+
+KPLANE_SLAB 
+-0.5  -0.5      ! Original point for 2D k plane
+1.0  0.0      ! The first vector to define 2D k plane 
+0.0  1.0      ! The second vector to define 2D k plane  for arc plots
+
+
+KCUBE_BULK
+0.50  0.50  0.50   ! Original point for 3D k plane 
+1.00  0.00  0.00   ! The first vector to define 3d k space plane
+0.00  1.00  0.00   ! The second vector to define 3d k space plane
+ 0.00  0.00  1.00   ! The third vector to define 3d k cube
+
+KPLANE_BULK
+0.00  0.00  0.00   ! Original point for 3D k plane 
+1.00  0.00  0.00   ! The first vector to define 3d k space plane
+0.00  1.00  0.00   ! The second vector to define 3d k space plane
+
+

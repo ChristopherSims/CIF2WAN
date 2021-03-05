@@ -1,0 +1,60 @@
+&CONTROL
+calculation ='scf'
+prefix = 'MBT'
+outdir = './bin'
+pseudo_dir = './PP/'
+verbosity='high'
+/
+
+&system
+ibrav = 0
+nat = 7
+ntyp = 3
+ecutwfc =60  !Ryberg
+ecutrho =240
+occupations = 'smearing'
+smearing = 'gaussian'
+degauss = 0.01
+
+!SOC
+noncolin = .FALSE.
+lspinorb = .FALSE.
+starting_magnetization(1) = 0
+starting_magnetization(2) = 0
+starting_magnetization(3) = 0
+
+
+/
+
+&ELECTRONS
+conv_thr = 1.0d-7
+mixing_beta = 0.495
+mixing_mode = 'TF'
+diagonalization= 'david'
+adaptive_thr=.true.
+/
+
+ATOMIC_SPECIES
+Mn 54.938045 mn_pbe_v1.5.uspp.F.UPF 
+Bi 208.9804 Bi_pbe_v1.uspp.F.UPF 
+Te 127.6 Te_pbe_v1.uspp.F.UPF 
+
+
+ATOMIC_POSITIONS (crystal)
+Mn 0.000000 0.000000 0.000000
+Bi 0.576691 0.576691 0.576691
+Bi 0.423309 0.423309 0.423309
+Te 0.867045 0.867045 0.867045
+Te 0.132955 0.132955 0.132955
+Te 0.703980 0.703980 0.703980
+Te 0.296020 0.296020 0.296020
+
+
+CELL_PARAMETERS (angstrom)
+13.698856 -2.180688 0.000000
+13.698856 2.180688 0.000000
+13.351718 0.000000 3.761076
+
+
+K_POINTS (automatic)
+8 8 8 0 0 0

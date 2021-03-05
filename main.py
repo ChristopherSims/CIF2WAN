@@ -1,4 +1,6 @@
 #MAIN
+import sys
+sys.path.append('Bin/')
 import input
 from ESPRESSO import MAT2ESPRESSO
 from ABINIT import MAT2ABINIT

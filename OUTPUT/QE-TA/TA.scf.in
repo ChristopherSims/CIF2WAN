@@ -1,0 +1,55 @@
+&CONTROL
+calculation ='scf'
+prefix = 'TA'
+outdir = './bin'
+pseudo_dir = './PP/'
+verbosity='high'
+/
+
+&system
+ibrav = 0
+nat = 4
+ntyp = 2
+ecutwfc =60  !Ryberg
+ecutrho =240
+occupations = 'smearing'
+smearing = 'gaussian'
+degauss = 0.01
+
+!SOC
+noncolin = .TRUE.
+lspinorb = .TRUE.
+starting_magnetization(1) = 0
+starting_magnetization(2) = 0
+
+
+/
+
+&ELECTRONS
+conv_thr = 1.0d-7
+mixing_beta = 0.495
+mixing_mode = 'TF'
+diagonalization= 'david'
+adaptive_thr=.true.
+/
+
+ATOMIC_SPECIES
+Ta 180.94788 Ta_pbe_v1.uspp.F.UPF 
+As 74.9216 As.pbe-n-rrkjus_psl.0.2.UPF 
+
+
+ATOMIC_POSITIONS (crystal)
+As 0.417731 0.417731 0.835461
+As 0.167731 0.667731 0.335461
+Ta 0.999969 0.999969 0.999939
+Ta 0.749969 0.249969 0.499939
+
+
+CELL_PARAMETERS (angstrom)
+3.338637 0.000000 -0.945097
+-0.267537 3.327901 -0.945097
+-0.002419 -0.002621 6.361018
+
+
+K_POINTS (automatic)
+8 8 8 0 0 0

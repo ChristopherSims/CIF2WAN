@@ -1,0 +1,62 @@
+&CONTROL
+calculation ='scf'
+prefix = 'EB'
+outdir = './bin'
+pseudo_dir = './PP/'
+verbosity='high'
+/
+
+&system
+ibrav = 0
+nat = 7
+ntyp = 2
+ecutwfc =60  !Ryberg
+ecutrho =240
+occupations = 'smearing'
+smearing = 'gaussian'
+degauss = 0.01
+
+!SOC
+noncolin = .FALSE.
+lspinorb = .FALSE.
+starting_magnetization(1) = 0
+starting_magnetization(2) = 0
+
+Hubbard_U(1) = 6.4
+Hubbard_J0(1) = 1
+lda_plus_u = .TRUE.
+lda_plus_u_kind = 1
+
+/
+
+&ELECTRONS
+conv_thr = 1.0d-7
+mixing_beta = 0.495
+mixing_mode = 'TF'
+diagonalization= 'david'
+adaptive_thr=.true.
+/
+
+ATOMIC_SPECIES
+Eu 151.964 Eu.GGA-PBE-paw-v1.0.UPF 
+B 10.811 Ba_ONCV_PBE-1.0.upf 
+
+
+ATOMIC_POSITIONS (crystal)
+Eu 0.000000 0.000000 0.000000
+B 0.795700 0.500000 0.500000
+B 0.204300 0.500000 0.500000
+B 0.500000 0.500000 0.795700
+B 0.500000 0.500000 0.204300
+B 0.500000 0.204300 0.500000
+B 0.500000 0.795700 0.500000
+
+
+CELL_PARAMETERS (angstrom)
+4.190000 0.000000 0.000000
+0.000000 4.190000 0.000000
+0.000000 0.000000 4.190000
+
+
+K_POINTS (automatic)
+8 8 8 0 0 0

@@ -1,0 +1,16 @@
+Patchnotes V0.7
+
+General
+Added Pseudopotentials for Siesta
+1st Generation GUI
+Added Pure CIF interface
+Added draft of Userguide
+added examples (Bi2Se3, HfP2, TaAs)
+
+Siesta
+Well tested
+
+VASP
+
+
+

@@ -1,0 +1,28 @@
+Patchnotes V0.65
+
+General
+Added Pseudopotentials for Espresso
+Added Pseudopotentials for Abinit
+Changed Pseudopotential folder location + reference for clarity
+All DFT outputs are one command - for clarity
+Added all heavy fermion U and J values (HF.csv), Users are suggest to test them though
+added flag for conventional or primitive cells (Abinit and espresso)
+added flag to select relaxed cells (abinit and espresso)
+move core programs to bin, for clarity
+
+Espresso
+fixed a error that causes pseudopotentials to not be loaded
+
+Abinit
+Fixed a Znulc error
+MMN error (SOC) still persists, this is an error with the abinit code
+
+
+Seista
+Added basic siesta functionality
+
+VASP
+Integrated VASP functionality W/O pseudopotentials
+
+
+

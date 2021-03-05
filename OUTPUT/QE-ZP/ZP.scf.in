@@ -1,0 +1,63 @@
+&CONTROL
+calculation ='scf'
+prefix = 'ZP'
+outdir = './bin'
+pseudo_dir = './PP/'
+verbosity='high'
+/
+
+&system
+ibrav = 0
+nat = 12
+ntyp = 2
+ecutwfc =60  !Ryberg
+ecutrho =240
+occupations = 'smearing'
+smearing = 'gaussian'
+degauss = 0.01
+
+!SOC
+noncolin = .FALSE.
+lspinorb = .FALSE.
+starting_magnetization(1) = 0
+starting_magnetization(2) = 0
+
+
+/
+
+&ELECTRONS
+conv_thr = 1.0d-7
+mixing_beta = 0.495
+mixing_mode = 'TF'
+diagonalization= 'david'
+adaptive_thr=.true.
+/
+
+ATOMIC_SPECIES
+Zr 91.224 Zr_pbe_v1.uspp.F.UPF 
+P 30.973762 P.pbe-n-rrkjus_psl.1.0.0.UPF 
+
+
+ATOMIC_POSITIONS (crystal)
+Zr 0.250000 0.279633 0.836904
+Zr 0.750000 0.720367 0.163096
+Zr 0.250000 0.779633 0.663096
+Zr 0.750000 0.220367 0.336904
+P 0.250000 0.903480 0.356459
+P 0.750000 0.096520 0.643541
+P 0.250000 0.403480 0.143541
+P 0.750000 0.596520 0.856459
+P 0.750000 0.610268 0.460840
+P 0.250000 0.389732 0.539160
+P 0.750000 0.110268 0.039160
+P 0.250000 0.889732 0.960840
+
+
+CELL_PARAMETERS (angstrom)
+3.526565 0.000000 0.000000
+0.000000 6.515194 0.000000
+0.000000 0.000000 8.822101
+
+
+K_POINTS (automatic)
+8 8 8 0 0 0

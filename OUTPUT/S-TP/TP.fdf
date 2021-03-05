@@ -1,0 +1,84 @@
+#FDF for SIESTA
+SystemName        TP
+SystemLabel        TP
+NumberOfSpecies         2
+NumberOfAtoms         4
+
+
+#
+User-Basis     .false.
+#
+
+
+%block ChermicalSpeciesLabel
+    1   73   Ta
+    2   15    P
+%endblock ChermicalSpeciesLabel
+
+LatticeConstant    1 Ang
+
+%block LatticeVectors
+-1.670086 1.670086 5.701800
+1.670086 -1.670086 5.701800
+1.670086 1.670086 -5.701800
+%endblock LatticeVectors
+
+
+AtomicCoordinatesFormat ScaledCartesian
+
+%block AtmoicCoordinatesAndAtomicSpecies
+0.749245 0.249245 0.500000 2
+0.999245 0.999245 0.000000 2
+0.166755 0.666755 0.500000 1
+0.416755 0.416755 0.000000 1
+%endblock AtmoicCoordinatesAndAtomicSpecies
+
+
+
+#SCF INFO
+MeshCutoff  200 Ry
+MaxSCFIterations  100
+DM.MixingWeight  0.3
+DM.NumberPulay    3
+DM.Tolerance1.d-4
+DM.UseSaveDM
+
+
+%block kgrid_Monkhorst_Pack
+  4  0  0  0
+  0  4  0  0
+  0  0  4  0
+%endblock kgrid_Monkhorst_Pack
+
+
+WriteBands    T
+
+
+
+#
+# Variables related with the Wannierization of the manifolds
+NumberOfBandManifoldsForWannier 1
+%block WannierProjections
+1 # Sequential index of the manifold, from 1 to NumberOfBandManifoldsForWannier
+1 120 # Indices of the initial and final band of the manifold
+120 # Number of bands for Wannier transformation
+9 10 11 3 7 # Indices of the orbitals that will be used as localized trial orbitals
+num_iter 100 # Number of iterations for the minimization of \Omega
+wannier_plot 3 # Plot the Wannier function
+write_hr # Write the Hamiltonian in the WF basis
+write_tb # Write the Hamiltonian in the WF basis
+-5.0 5.0 # Bottom and top of the outer energy window for band disentanglement (in eV)
+-2.0 2.0 # Bottom and top of the inner energy window for band disentanglement (in eV)
+%endblock WannierProjections
+
+%block kMeshforWannier
+  4  4  4
+%endblock kMeshforWannier
+
+
+###Siesta2wannier inputs###
+#Siesta2Wannier90.WriteMmn .true.
+#Siesta2Wannier90.WriteAmn .true.
+#Siesta2Wannier90.WriteEig .true.
+Siesta2Wannier90.NumberOfBands  120
+

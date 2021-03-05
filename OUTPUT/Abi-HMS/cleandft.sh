@@ -1,0 +1,11 @@
+rm job.*
+rm *.1o*
+rm *.out*
+rm log
+rm w90.eig
+rm w90.mmn
+rm w90.werr
+rm err
+rm w90.nnkp
+rm w90.wout
+rm wannier90random.amn
