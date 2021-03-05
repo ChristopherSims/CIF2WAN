@@ -1,5 +1,6 @@
 # CIF2WANv0.5
 CIF2WAN
+
 See https://arxiv.org/abs/2006.12647 for details
 
 VASP: not well tested
