@@ -1,4 +1,4 @@
-# CIF2WANv0.5
+# CIF2WAN v0.65
 CIF2WAN
 
 Edit input.Py then run main.py
