@@ -21,7 +21,7 @@ add pure CIF interface
 
 add PP for siesta
 
-add LDA+U for siesta 
+LDA+U is not implemented fully in Siesta (beta) will not be added to the program
 
 Known issues:
 
