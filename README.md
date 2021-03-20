@@ -21,9 +21,11 @@ add pure CIF interface
 
 add PP for siesta
 
-LDA+U is not implemented fully in Siesta (beta) will not be added to the program
+
 
 Known issues:
+
+LDA+U is not implemented fully in Siesta (beta) will not be added to the program
 
 wannier90 convergence, wobbly bands. No way to fix, increase num_iter
 
