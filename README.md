@@ -19,9 +19,6 @@ add GUI
 
 add pure CIF interface
 
-add PP for siesta
-
-
 
 Known issues:
 
