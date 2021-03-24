@@ -1,15 +1,15 @@
-# CIF2WAN v0.65
+# CIF2WAN v0.66
 CIF2WAN
 
 Edit input.Py then run main.py
 
 See https://arxiv.org/abs/2006.12647 for details
 
-VASP: not well tested
+VASP: testing
 
 Quantum espresso: well tested
 
-Siesta: testing
+Siesta: Well tested
 
 Abinit: well tested
 
