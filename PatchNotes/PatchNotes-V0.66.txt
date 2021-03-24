@@ -1,0 +1,2 @@
+Siesta well tested - wannier90 output ok
+added pseudopotentials for Siesta
