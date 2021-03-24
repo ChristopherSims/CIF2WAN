@@ -9,7 +9,7 @@ VASP: testing
 
 Quantum espresso: well tested
 
-Siesta: Well tested
+Siesta: Well tested (Run on only 1 core, there is an error at wannerization in multicore use)
 
 Abinit: well tested
 
