@@ -3,9 +3,9 @@
 import os
 #### PyMATGEN
 import pymatgen as mg
-from pymatgen import Composition
-from pymatgen import Lattice, Structure, Molecule, Specie
-import pymatgen.core.periodic_table as Element
+from pymatgen.core import Composition
+from pymatgen.core import Lattice, Structure, Molecule, Species
+from pymatgen.core.periodic_table import Element
 from pymatgen.io.cif import CifParser,CifWriter
 import pymatgen.ext.matproj as matproj
 # PLOTTING
@@ -29,8 +29,7 @@ class MAT2VASP:
         self.seedname = str(input.SEEDNAME) # set class variable SEEDNAME from input file
         self.Ecut = input.ECUT #Class variable; in Ryberg, transfer from input file
         self.kpts = input.KMESH ### KPTS from input file for a generator, class variable
-        self.SEEDDIR = "OUTPUT/" + 'VSP-' + self.seedname + '/'  #set the seed directory
-        self.pseudodir = "ABINIT/ABINITPP/ATOMICDATA/" # Set the directory for pseudopotentials
+        self.SEEDDIR = "OUTPUT/" + 'V-' + self.seedname + '/'  #set the seed directory
         self.EMAIL = input.EMAIL #Class variable; set email for SLURM from input file
         self.NCORE = input.ncore #Class Variable; number of cores, taken from input file
         self.SOC = input.SOC
@@ -108,14 +107,15 @@ class MAT2VASP:
         num_bands = input.NUMBANDS
         num_wann = num_bands - (num_bands%2) # FORCE EVEN
         self.wan = num_wann
+        self.WTwan = num_wann
         if self.SOC:
-            self.WTwan = self.wan/2
+            self.WTwan = num_wann/2
         num_bands = 0
-        for x in struct.species:
-            PP = gb.glob(self.pseudodir + str(x) + ".*") 
-            readpp = minidom.parse(''.join(map(str,PP)))
-            items = readpp.getElementsByTagName('atom')
-            num_bands += float(items[0].attributes['valence'].value)
+        #for x in struct.species:
+           # PP = gb.glob(self.pseudodir + str(x) + ".*") 
+            #readpp = minidom.parse(''.join(map(str,PP)))
+            #items = readpp.getElementsByTagName('atom')
+            #num_bands += float(items[0].attributes['valence'].value)
         num_wann = num_bands - (num_bands%2) # FORCE EVEN
     def PMG2WAN(self):
         with open(self.SEEDDIR + 'pbe/' + "INCAR",'w',newline='\n') as f:

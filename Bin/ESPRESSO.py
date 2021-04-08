@@ -2,9 +2,9 @@
 import os
 #### PyMATGEN
 import pymatgen as mg
-from pymatgen import Composition
-from pymatgen import Lattice, Structure, Molecule, Specie
-import pymatgen.core.periodic_table as Element
+from pymatgen.core import Composition
+from pymatgen.core import Lattice, Structure, Molecule, Species
+from pymatgen.core.periodic_table import Element
 from pymatgen.io.cif import CifParser,CifWriter
 import pymatgen.ext.matproj as matproj
 # PLOTTING
@@ -121,7 +121,7 @@ class MAT2ESPRESSO:
                 scf.write("%s " %(str(atom))) #Write element symbol to file
                 PP = gb.glob(self.pseudodir + str(atom) + "*") # get pseudopotential
                 PP = PP[0] # get first Psuedopotential found, for robustness
-                element = mg.Element(str(atom)) # Get element information
+                element = Element(str(atom)) # Get element information
                 amass = float(element.atomic_mass) # Get atomic mass
                 scf.write("%s " %(amass))    #write atomic mass
                 sendPPdir = self.SEEDDIR + "PP/" + ''.join(map(str,PP))[len(self.pseudodir):] # get directory to send PP
@@ -197,7 +197,7 @@ class MAT2ESPRESSO:
                     nscf.write("%s " %(str(atom))) #Write element symbol to file
                     PP = gb.glob(self.pseudodir + str(atom) + "*") # get pseudopotential
                     PP = PP[0] # get first Psuedopotential found, for robustness
-                    element = mg.Element(str(atom)) # Get element information
+                    element = Element(str(atom)) # Get element information
                     amass = float(element.atomic_mass) # Get atomic mass
                     nscf.write("%s " %(amass))    #write atomic mass
                     sendPPdir = self.SEEDDIR + "PP/" + ''.join(map(str,PP))[len(self.pseudodir):] # get directory to send PP
@@ -549,7 +549,7 @@ class MAT2ESPRESSO:
                 f.write('export debug_logs="$SLURM_JOB_ID/job_$SLURM_JOB_ID.log"\n')
                 f.write('export benchmark_logs="$SLURM_JOB_ID/job_$SLURM_JOB_ID.log"\n\n\n')
                 f.write('#Load Modules\n')
-                f.write('ml load espresso\n\n\n')
+                f.write('ml load wannier90\n\n\n')
                 f.write("cd $SLURM_SUBMIT_DIR\n")
                 f.write('# Create Log File\n')
                 f.write('echo $SLURM_SUBMIT_DIR')

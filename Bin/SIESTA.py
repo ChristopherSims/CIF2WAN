@@ -2,9 +2,9 @@
 import os
 #### PyMATGEN
 import pymatgen as mg
-from pymatgen import Composition
-from pymatgen import Lattice, Structure, Molecule, Specie
-import pymatgen.core.periodic_table as Element
+from pymatgen.core import Composition
+from pymatgen.core import Lattice, Structure, Molecule, Species
+from pymatgen.core.periodic_table import Element
 from pymatgen.io.cif import CifParser,CifWriter
 import pymatgen.ext.matproj as matproj
 # PLOTTING
@@ -22,6 +22,7 @@ import kmesh
 class MAT2SIESTA:
     def __init__(self):
        # self.CIFDIR = "cifdir/"
+        self.cutoff = input.ECUT;
         self.key = input.APIKEY # Import API key from input
         self.MaterialID = input.MATERIALID # Set class variable MaterialID from input
         self.seedname = str(input.SEEDNAME) # set class variable SEEDNAME from input file
@@ -33,6 +34,10 @@ class MAT2SIESTA:
         self.NCORE = input.ncore #Class Variable; number of cores, taken from input file
         self.SOC = input.SOC
         self.nbnd = input.NUMBANDS
+        self.lspinorb = '.FALSE.'
+        if input.SOC:
+            self.noncolin = '.TRUE.'
+            self.lspinorb = '.TRUE.'
         selectconventional = input.conventional_cell
         selectrelax = input.Relax
         # MAKE DIRECTORIES
@@ -111,7 +116,7 @@ class MAT2SIESTA:
             f.write("#\n")
             f.write("User-Basis     .false.\n")
             f.write("#\n\n\n")
-            f.write("%"+"block ChermicalSpeciesLabel\n")
+            f.write("%"+"block ChemicalSpeciesLabel\n")
             # find the number of each unique atoms
             typnum = np.zeros(self.UNIQUE_ATOMS.size)
             atomlabel = np.zeros(self.UNIQUE_ATOMS.size)
@@ -120,13 +125,13 @@ class MAT2SIESTA:
                 atomlabel[i] = i+1
             for i,x in enumerate(self.UNIQUE_ATOMS):
                 f.write("%5i%5i%5s\n" %(i+1,x.Z,x.symbol)) # label, atomic number, symbol
-            f.write("%"+"endblock ChermicalSpeciesLabel\n\n")
-            f.write("LatticeConstant%5i Ang\n\n" %(i))
+            f.write("%"+"endblock ChemicalSpeciesLabel\n\n")
+            f.write("LatticeConstant 1 Ang\n\n")
             f.write("%" + "block LatticeVectors\n")
             f.write(str(self.struct.lattice) + "\n")
             f.write("%" + "endblock LatticeVectors\n\n\n")
             f.write("AtomicCoordinatesFormat ScaledCartesian\n\n")
-            f.write("%" + "block AtmoicCoordinatesAndAtomicSpecies\n")
+            f.write("%" + "block AtomicCoordinatesAndAtomicSpecies\n")
             prtlabel = np.zeros(self.numlist.size)
             for index,x in enumerate(self.struct.frac_coords):
                 for i,Z in enumerate(np.unique(self.numlist)):
@@ -134,23 +139,35 @@ class MAT2SIESTA:
                         prtlabel[index] = atomlabel[i]
             for index,x in enumerate(self.struct.frac_coords): 
                 f.write("%f %f %f %i\n" %(x[0], x[1], x[2], int(prtlabel[index])))
-            f.write("%" + "endblock AtmoicCoordinatesAndAtomicSpecies\n")
+            f.write("%" + "endblock AtomicCoordinatesAndAtomicSpecies\n")
+            f.write("PAO.SplitNorm 0.20\n")
+            f.write("PAO.EnergyShift 0.1 eV\n\n\n")
             f.write("\n\n\n#SCF INFO\n")
             #f.write("kgrid_cutoff%5i Ang\n" %(5))
-            f.write("MeshCutoff%5i Ry\n" %(200))
+            f.write("MeshCutoff%5i Ry\n" %(self.cutoff))
             f.write("MaxSCFIterations%5i\n" %(100))
-            f.write("DM.MixingWeight%5.1f\n" %(0.3))    
+            f.write("DM.MixingWeight%5.1f\n" %(0.7))    
             f.write("DM.NumberPulay%5i\n" %(3))
-            f.write("DM.Tolerance%5s\n" %("1.d-4"))
-            f.write("DM.UseSaveDM\n\n\n")
+            f.write("DM.Tolerance%5s\n" %("1.d-9"))
+            f.write("DM.UseSaveDM%5s .true.\n\n\n")
+            f.write("xc.functional%5sGGA%5s# Exchange-correlation functional\n")
+            f.write("xc.authors%5sPBE%5s# Exchange-correlation version\n")
+            if self.SOC:
+                f.write("SpinPolarized%5strue%5s# Logical parameters are: yes or no\n")
+            else:
+                f.write("SpinPolarized%5sfalse%5s# Logical parameters are: yes or no\n")
+            f.write("SolutionMethod%5sdiagon%5s # OrderN or Diagon\n")
+            f.write("ElectronicTemperature%5s25 meV%5s# Temp. for Fermi smearing\n")
+            f.write("Diag.DivideAndConquer .true.\n")
+            f.write("Diag.ParallelOverK .true.\n")
+            f.write("WriteEigenvalues .true.\n")
+            f.write("WriteKbands .true.\n")
+            f.write("WriteBands .true.\n")
             f.write("%" + "block kgrid_Monkhorst_Pack\n")
             f.write("%3i%3i%3i%3i\n" %(self.kpts[0],0,0,0))
             f.write("%3i%3i%3i%3i\n" %(0,self.kpts[1],0,0))
             f.write("%3i%3i%3i%3i\n" %(0,0,self.kpts[2],0))
             f.write("%" + "endblock kgrid_Monkhorst_Pack\n\n\n")
-            f.write("WriteBands%5s\n" %("T"))
-            if self.SOC:
-                f.write("SpinPolarized%5s\n" %("T"))
 
             f.write("\n\n\n")
             f.write("#\n")
@@ -160,24 +177,20 @@ class MAT2SIESTA:
             f.write("1 # Sequential index of the manifold, from 1 to NumberOfBandManifoldsForWannier\n")
             f.write("%i %3i # Indices of the initial and final band of the manifold\n" %(1,self.nbnd))
             f.write("%i # Number of bands for Wannier transformation\n" %(self.nbnd))
-            f.write("9 10 11 3 7 # Indices of the orbitals that will be used as localized trial orbitals\n")
-            f.write("num_iter 100 # Number of iterations for the minimization of \Omega\n")
-            f.write("wannier_plot 3 # Plot the Wannier function\n")
+            f.write("num_iter 0 # Number of iterations for the minimization of \Omega\n")
             f.write("write_hr # Write the Hamiltonian in the WF basis\n")
-            f.write("write_tb # Write the Hamiltonian in the WF basis\n")
-            f.write("-5.0 5.0 # Bottom and top of the outer energy window for band disentanglement (in eV)\n")
-            f.write("-2.0 2.0 # Bottom and top of the inner energy window for band disentanglement (in eV)\n")
             f.write("%"+"endblock WannierProjections\n\n")
             f.write("%"+"block kMeshforWannier\n")
             f.write("%3i%3i%3i\n" %(self.kpts[0],self.kpts[1],self.kpts[2]))
             f.write("%"+"endblock kMeshforWannier\n\n\n")
             f.write("###Siesta2wannier inputs###\n")
-            f.write("#Siesta2Wannier90.WriteMmn .true.\n")
-            f.write("#Siesta2Wannier90.WriteAmn .true.\n")
-            f.write("#Siesta2Wannier90.WriteEig .true.\n")
+            f.write("Siesta2Wannier90.WriteMmn .true.\n")
+            f.write("Siesta2Wannier90.WriteAmn .true.\n")
+            f.write("Siesta2Wannier90.WriteEig .true.\n")
             f.write("Siesta2Wannier90.NumberOfBands%5i\n" %(self.nbnd))
             f.write("\n")
-    #def write_slurm(self):
+            
+    #WRITING SLURM FILE
         with open(self.SEEDDIR + "siesta.slurm",'w',newline= '\n') as f:
             f.write("#!/bin/bash\n")
             #f.write("#SBATCH --ntasks=%i\n" %(self.NCORE))
@@ -187,13 +200,14 @@ class MAT2SIESTA:
             f.write("#SBATCH --output=job.%J.out\n")
             f.write("#SBATCH --job-name=%s_SIESTA\n" %(self.seedname))
             f.write('#SBATCH --mail-user=%s\n' %(self.EMAIL))
-            f.write("#SBATCH --mail-type=ALL\n\n\n")
+            f.write("#SBATCH --mail-type=NONE\n\n\n")
             f.write('#Select how logs get stored\n')
             f.write("mkdir $SLURM_JOB_ID\n")
             f.write('export debug_logs="$SLURM_JOB_ID/job_$SLURM_JOB_ID.log"\n')
             f.write('export benchmark_logs="$SLURM_JOB_ID/job_$SLURM_JOB_ID.log"\n\n\n')
             f.write('#Load Modules\n')
-            f.write('ml load abinit\n\n\n')
+            f.write('ml load wannier90\n')
+            f.write('ml load siesta\n\n\n')
             f.write("cd $SLURM_SUBMIT_DIR\n")
             f.write('# Create Log File\n')
             f.write('echo $SLURM_SUBMIT_DIR')
@@ -210,7 +224,11 @@ class MAT2SIESTA:
             f.write('echo "ulimit -l: " >> $benchmark_logs\n')
             f.write('ulimit -l >> $benchmark_logs\n\n\n')
             f.write('# run file\n')
+            f.write('wannier90.x -pp %s' %(self.seedname))
+            f.write('sleep 3\n')
             f.write('mpirun -np %i siesta <%s.fdf> %s.out\n' %(self.NCORE,self.seedname,self.seedname))
+            f.write('sleep 3\n')
+            f.write('mv %s.eigW %s.eig\n' %(self.seedname,self.seedname))
             f.write('sleep 3\n')
             f.write('grep CONV w90.wout >> Wconv.txt\n')
             f.write('echo "Program is finished with exit code $? at: `date`"\n\n\n')
@@ -222,7 +240,7 @@ class MAT2SIESTA:
             f.write('mv job.$SLURM_JOB_ID.err $SLURM_JOB_ID/\n')
             f.write('mv job.$SLURM_JOB_ID.out $SLURM_JOB_ID/\n')
             f.write('rm -rf $SLURM_JOB_ID\n')
-    #def write_clean(self):
+    #WRITING CLEAN DFT FILE
         with open(self.SEEDDIR + "cleandft.sh",'w',newline='\n') as f:
             f.write("rm INPUT_TMP.*\n")
             f.write("rm *.ion\n")
@@ -236,10 +254,54 @@ class MAT2SIESTA:
             f.write("rm MESSAGES\n")
             f.write("rm *.BONDS\n")
             f.write("rm *.BONDS_FINAL\n")
-            f.write("rm *.bib\n")
+            f.write("rm *.KP\n")
+            f.write("rm *.STRUCT_OUT\n")
+            f.write("rm *.xml\n")
+            f.write("rm *.alloc\n")
+            f.write("rm FORCE_STRESS\n")
+            f.write("rm NON_TRIMMED_KP_LIST\n")
+            f.write("rm CLOCK\n")
+            f.write("rm BASIS_ENTHALPY\n")
+            f.write("rm BASIS_HARRIS_ENTHALPY\n")
+            f.write("rm Wconv.txt\n")
+            f.write("rm *.werr\n")
+            f.write("rm *.wout\n")
             f.write("rm *.nnkp\n")
             f.write("rm *.EIG\n")
-    #def write_wt(self):
+            f.write("rm *.xyz\n")
+            f.write("rm *_wsvec.dat\n")
+            f.write("rm *.mmn\n")
+            f.write("rm *.eig\n")
+            f.write("rm *.amn\n")
+            f.write("rm *.err\n")
+            f.write("rm *_NORMAL_EXIT\n")
+            f.write("rm *.DOS \n")
+            f.write("rm *.chk \n")
+            f.write("rm *.PDOS\n")
+            f.write("rm *.out\n")
+            f.write("rm *.dat\n")
+        #########WANNIER90 FILE####################33
+        with open(self.SEEDDIR + self.seedname + ".win",'w',newline='\n') as f:
+            f.write("write_hr = .TRUE.\n")
+            f.write("write_xyz = .TRUE.\n")
+            f.write("!wannier_plot = .TRUE. \n")
+            f.write("spinors = %s\n" %(self.lspinorb))
+            f.write("num_wann = %i\n" %(self.wan))
+            f.write("dis_num_iter=1000\n")
+            f.write("!trial_step=50\n")
+            f.write("num_iter = 1000\n\n\n\n")
+            f.write("begin unit_cell_cart\n")
+            f.write(str(self.struct.lattice) + "\n") ### atomic structure
+            f.write("end unit_cell_cart\n\n\n")
+            f.write("begin atoms_frac\n")
+            for index,x in enumerate(self.struct.frac_coords):
+                f.write("%s %f %f %f\n" %(str(self.struct.species[index]),x[0], x[1], x[2]))
+            f.write("end atoms_frac\n\n\n")
+            f.write("begin projections \n")
+            f.write("random \n")
+            f.write("end projections\n\n\n")
+            f.write(kmesh.WANNIER(self.kpts[0],self.kpts[1],self.kpts[2]))            
+    #WRITE Wanniertools file
         with open(self.SEEDDIR + "WT/wt.in",'w',newline='\n') as f:
             f.write("#### wt file ###########\n")
             f.write("&TB_FILE\n")

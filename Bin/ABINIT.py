@@ -3,9 +3,9 @@ import os
 #### PyMATGEN
 import math
 import pymatgen as mg
-from pymatgen import Composition
-from pymatgen import Lattice, Structure, Molecule, Specie
-import pymatgen.core.periodic_table as Element
+from pymatgen.core import Composition
+from pymatgen.core import Lattice, Structure, Molecule, Species
+from pymatgen.core.periodic_table import Element
 from pymatgen.io.cif import CifParser,CifWriter
 import pymatgen.ext.matproj as matproj
 # PLOTTING
@@ -106,6 +106,7 @@ class MAT2ABINIT:
             num_bands += float(items[0].attributes['valence'].value)
         num_wann = num_bands - (num_bands%2) # FORCE EVEN
         self.wan = num_wann
+        self.WTwan = num_wann
         if self.SOC:
             self.WTwan = self.wan/2
 
