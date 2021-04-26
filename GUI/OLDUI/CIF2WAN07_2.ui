@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QDialog" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>747</width>
+    <height>716</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="gridLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>20</y>
+     <width>511</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="3">
+     <widget class="QLineEdit" name="MID">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>MP-11111</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="5">
+     <widget class="QLabel" name="Bands_label">
+      <property name="text">
+       <string>Number of Bands</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="5">
+     <widget class="QLabel" name="MID_label">
+      <property name="text">
+       <string>Material ID</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QLineEdit" name="Key">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Your API Key</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLineEdit" name="DFT">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>ESPRESSO</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLineEdit" name="Ecut">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>60</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLineEdit" name="ncore">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="inputMask">
+       <string extracomment="60"/>
+      </property>
+      <property name="maxLength">
+       <number>32767</number>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Normal</enum>
+      </property>
+      <property name="placeholderText">
+       <string>60</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="3">
+     <widget class="QLineEdit" name="bands">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>111</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="ncore_label">
+      <property name="text">
+       <string>Number of cores</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="5">
+     <widget class="QLabel" name="API_label">
+      <property name="text">
+       <string>API Key</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="5">
+     <widget class="QLabel" name="CIF_label">
+      <property name="text">
+       <string>CIF File</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="DFT_label">
+      <property name="text">
+       <string>DFT Type</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="5">
+     <widget class="QLabel" name="Seed_label">
+      <property name="text">
+       <string>Seed Name</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLineEdit" name="inputtype">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Pymatgen</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLineEdit" name="Kmesh3">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLineEdit" name="email">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Your email</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="3">
+     <widget class="QLineEdit" name="Seed">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>Default</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLabel" name="inputtype_label">
+      <property name="text">
+       <string>Input Type</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLabel" name="email_label">
+      <property name="text">
+       <string>Email</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="3">
+     <widget class="QLineEdit" name="Kmesh1">
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="3">
+     <widget class="QRadioButton" name="conventional">
+      <property name="text">
+       <string>Conventional Cell</string>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QRadioButton" name="SOC">
+      <property name="text">
+       <string>Spin Orbit Coupling</string>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="5">
+     <widget class="QLabel" name="Kmesh_label">
+      <property name="text">
+       <string>Kmesh</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="Kmesh2">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>4</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="5">
+     <widget class="QRadioButton" name="relax">
+      <property name="text">
+       <string>Relaxed Structure</string>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QRadioButton" name="Mag">
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="text">
+       <string>Magnetism</string>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="3">
+     <widget class="QLineEdit" name="ciffile">
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;.cif&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="placeholderText">
+       <string>.cif</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="5">
+     <widget class="QDialogButtonBox" name="start">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLabel" name="ECUT_label">
+      <property name="text">
+       <string>Cut off energy</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QToolButton" name="Ciftool">
+      <property name="text">
+       <string>...</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>start</sender>
+   <signal>accepted()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>432</x>
+     <y>304</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>start</sender>
+   <signal>rejected()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>500</x>
+     <y>304</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

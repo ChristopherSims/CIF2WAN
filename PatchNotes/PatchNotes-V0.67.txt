@@ -1,0 +1,24 @@
+Patchnotes V0.67
+
+General
+1st Generation GUI (General layout, not working) GUI/CIF2WANGUI
+Added Pure CIF interface
+Changed main.py to CIF2WAN.Py
+removed input.py and the import of it into the programs,
+input.in is the new input file and it is read by CIF2WAN.py
+ASE is now required for CIF inputs
+##pip install ASE, Crystal (if you want to band diagrams, etc)
+moved HF.csv to bin\
+remove the output folder, it will automatically generated
+
+Siesta
+Made some changes to the generated files
+
+VASP
+Converted PMG2VASP the new formats
+added CIF2VASP (still testing)
+
+
+
+
+
