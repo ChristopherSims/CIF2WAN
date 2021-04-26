@@ -3,7 +3,7 @@
 CIF2WAN
 ![arc_bulk](https://user-images.githubusercontent.com/7741705/112843580-b7d72800-9070-11eb-88be-43e407addfb9.png)
 
-Edit input.Py then run main.py
+Edit input.in then run CIF2WAN.py
 
 See https://arxiv.org/abs/2006.12647 for details
 
@@ -18,9 +18,6 @@ Abinit: well tested
 Todo:
 
 add GUI
-
-add pure CIF interface
-
 
 Known issues:
 
