@@ -1,5 +1,5 @@
 
-# CIF2WAN v0.66
+# CIF2WAN v0.67
 CIF2WAN
 ![arc_bulk](https://user-images.githubusercontent.com/7741705/112843580-b7d72800-9070-11eb-88be-43e407addfb9.png)
 
@@ -11,7 +11,7 @@ DFT Programs:
 
 To be added:
 
-ELK: https://github.com/rohkeaID/elk-w90-improved/tree/master/examples/wannier90/fccNi
+ELK: https://github.com/rohkeaID/elk-w90-improved/
 
 Integrated:
 
