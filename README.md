@@ -7,13 +7,21 @@ Edit input.in then run CIF2WAN.py
 
 See https://arxiv.org/abs/2006.12647 for details
 
-VASP: testing
+DFT Programs:
 
-Quantum espresso: well tested
+To be added:
+
+ELK: https://github.com/rohkeaID/elk-w90-improved/tree/master/examples/wannier90/fccNi
+
+Integrated:
+
+VASP: Testing
+
+Quantum espresso: Well tested
 
 Siesta: Well tested (Run on only 1 core, there is an error at wannerization in multicore use)
 
-Abinit: well tested
+Abinit: Well tested
 
 Todo:
 
@@ -21,7 +29,7 @@ add GUI
 
 Known issues:
 
-LDA+U is not implemented fully in Siesta (beta) will not be added to the program
+LDA+U is not implemented fully in Siesta (beta); will not be added to the program
 
 wannier90 convergence, wobbly bands. No way to fix, increase num_iter
 
