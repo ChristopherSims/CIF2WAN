@@ -11,7 +11,7 @@ DFT Programs:
 
 To be added:
 
-ELK: https://github.com/rohkeaID/elk-w90-improved/
+ELK: https://elk.sourceforge.io/
 
 Integrated:
 
